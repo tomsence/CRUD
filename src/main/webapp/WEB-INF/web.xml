@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>pm</display-name>
+  <!-- 程序加载时的页面 -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 配置前端控制器 -->
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<!-- contextConfigLocation配置springmvc加载的配置文件 适配器、处理映射等 -->
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>/WEB-INF/springmvc.xml</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<!-- / 所有访问都由dispatcherservlet进行解析 -->
+  	<!-- 前端控制器拦截了所有请求，不做特殊处理会导致部分静态资源无法使用，这种情况可以在springmvc.xml中配置（待测试出问题时再补充） -->
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+ 
+  <!-- 配置spring容器 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- 配置监听器 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+</web-app>

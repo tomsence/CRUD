@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pm.dao.BaseMapper">	
+	<insert id="insert" parameterType="java.util.HashMap">
+		insert into ${TABLE_NAME} (
+			<foreach collection="COLUMNS" item="item" index="index" separator=",">
+				${item}
+			</foreach>
+		) values (
+			<foreach collection="VALUES" item="item" index="index" separator=",">
+				#{item}
+			</foreach>
+		)
+	</insert>
+	<update id="update" parameterType="java.util.HashMap">
+		update ${TABLE_NAME} set
+		<foreach collection="DATA" item="item" index="index" separator=",">
+			${item.COLUMN} = #{item.COL_VALUE}
+		</foreach>
+		where ${KEY_ID} = #{KEY_VALUE}
+	</update>
+	<delete id="delete" parameterType="java.util.HashMap">
+		delete  from ${TABLE_NAME} where ${KEY_ID} = #{KEY_VALUE}
+	</delete>
+	<select id="query" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from ${TABLE_NAME} where ${KEY_ID} = #{KEY_VALUE}
+	</select>
+	<select id="queryAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from ${TABLE_NAME} where 
+		<foreach collection="DATA" item="item" index="index" separator=" and ">
+		 ${item.COLUMN} = #{item.COL_VALUE}
+		</foreach>
+	</select>
+	<select id="queryPageAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from ${TABLE_NAME} GROUP BY id DESC LIMIT ${firstPage},${rows}
+	</select>
+	<select id="queryCount" parameterType="java.util.HashMap" resultType="long">
+		select count(*) from ${TABLE_NAME}
+	</select>
+</mapper>

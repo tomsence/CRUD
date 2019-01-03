@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8" http-equiv="Context-Type" content="text/html"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>主页</title>
+    <style type="text/css">
+        * {
+			margin: 0%;
+			padding: 0%;
+		}
+
+        html,
+		body {
+			width: 100%;
+			height: 100%;
+			/*background-image: url('../img/pmp_bg.png');*/
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+
+		}
+
+        div.a1 {
+            width: 313px;
+			height: 339px;
+			border-radius: 8px;
+			/*margin: 200px 662px;*/
+			position: relative;
+			left: 0%;
+			top: 20%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: auto;
+			margin-bottom: auto;
+			background-color: rgb(120, 196, 247);
+        }
+
+        #login_td {
+            color: rgb(255, 255, 255);
+			font-family: "WindowsLCD,sans-serif";
+			font-size: 30px;
+			font-weight: Regular;
+			position: relative;
+			top: -5px;
+			left: 80px;
+        } 
+	</style>
+    <script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-easyui-1.6.10/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/default/easyui.css" type="text/css">
+    <link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/icon.css" type="text/css">
+    <script type="text/javascript" src="../js/main.js"></script>
+    <!--script type="text/javascript" src="../js/jquery-3.3.1.js"></script-->
+    <script type="text/javascript">
+        $(function(){
+            var login_main = document.getElementById("login_user");
+            login_main.innerHTML='<font size="3">  <strong>欢迎：</strong>'+localStorage.userName+'</font>';
+        })
+        function openTab(text, url){
+            var cnt = '<iframe scrolling="auto" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+            if ($("#tabs").tabs('exists', text)) {
+                $('#tabs').tabs('select', text);    
+            } else {
+                $('#tabs').tabs('add', {
+                    title : text,            
+                    closable : true,           
+                    content : cnt        
+                    });  
+             }
+        }
+	</script>
+</head>
+<body class="easyui-layout">
+    <div region="north" style="height: 70px; background-color: rgb(24, 81, 172);split:true">
+        <table style="padding: 5px" width="100%">
+            <tr>
+                <td width="50%">
+                    <h2>项目管理系统</h2>
+                </td>
+                <td valign="bottom" align="right" width="50%" id="login_user">
+                    <!--font size="3">  <strong>欢迎：</strong>admin</font-->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div region="west" style="width: 200px;split:true" title="导航菜单" >
+        <div class="easyui-accordion" data-options="fit:true,border:false">
+            <div title="系统管理" data-options="iconCls:'icon-save'" style="padding:10px">
+                <a href="#" class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-save'" style="width: 150px" onclick="openTab('用户管理','./userMgr.html')">用户管理</a>
+                <a href="#" class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-save'" style="width: 150px;">部门管理</a>
+                <a href="#" class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-save'" style="width: 150px;">角色管理</a>
+            </div>
+            <div title="权限管理" data-options="iconCls:'icon-save'" style="padding:10px">
+                <a href="#" class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-save'" style="width: 150px">菜单权限</a>
+                <a href="#" class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-save'" style="width: 150px;">按钮权限</a>
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'"
+                   style="width: 150px;" onclick="logout()">安全退出</a>
+            </div>
+        </div> 
+    </div>
+    <div data-options="region:'center'" style="background:rgb(235, 230, 230);">
+        <div class="easyui-tabs" fit="true" border="false" id="tabs">
+            <div title="首页" data-options="iconCls:'icon-home'">
+                <div align="center" style="padding-top: 100px"><font color="red" size="10">欢迎使用</font></div>
+            </div>
+        </div>
+    </div>
+    <div region="south" style="height: 25px;padding: 5px" align="center">
+    Copyright © 2018-2020 项目管理系统 版权所有
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.pm</groupId>
+  <artifactId>pm</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <!-- 使用properties来统一管理版本信息 -->
+  <properties>
+  	<junit.version>4.12</junit.version>
+  	<log4j.version>1.2.17</log4j.version>
+  	<slf4j.version>1.7.25</slf4j.version>
+  	<spring.version>4.3.14.RELEASE</spring.version>
+  	<jdbc.version>5.1.44</jdbc.version>
+  	<servlet.version>2.5</servlet.version>
+  	<jackson.version>1.9.12</jackson.version>
+  	<aspectj.version>1.8.6</aspectj.version>
+  	<file.version>1.3.1</file.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- 单元测试 -->
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>${junit.version}</version>
+  	</dependency>
+  	<!-- 日志 -->
+  	<dependency>
+  		<groupId>log4j</groupId>
+  		<artifactId>log4j</artifactId>
+  		<version>${log4j.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-api</artifactId>
+  		<version>${slf4j.version}</version>
+  	</dependency>
+  	<!-- spring -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-core</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context-support</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-webmvc</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-tx</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-jdbc</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-aop</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<!-- AspectJ是一个面向切面的框架 -->
+  		<groupId>org.aspectj</groupId>
+  		<artifactId>aspectjweaver</artifactId>
+  		<version>${aspectj.version}</version>
+  	</dependency>
+  	
+  	<!-- jdbc驱动 -->
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>${jdbc.version}</version>
+  	</dependency>
+  	<!-- servlet包含的类及方法 -->
+  	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>servlet-api</artifactId>
+  		<version>${servlet.version}</version>
+  	</dependency>
+  	<!--解析json-->
+    <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.4</version>
+        <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.1</version>
+    </dependency>
+    <!-- mybatis 是ibatis的升级版，是一种orm工具，简化数据库操作-->
+    <dependency>
+    	<groupId>org.mybatis</groupId>
+    	<artifactId>mybatis</artifactId>
+    	<version>3.4.6</version>
+    </dependency>
+    <!-- 一个用来整合mybatis和spring框架的小类库 -->
+    <dependency>
+    	<groupId>org.mybatis</groupId>
+    	<artifactId>mybatis-spring</artifactId>
+    	<version>1.3.2</version>
+    </dependency>
+    <!-- 文件支持 -->
+    <dependency>
+    	<groupId>commons-fileupload</groupId>
+    	<artifactId>commons-fileupload</artifactId>
+    	<version>${file.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>commons-io</groupId>
+    	<artifactId>commons-io</artifactId>
+    	<version>2.5</version>
+    </dependency>
+    <!-- execl解析 -->
+    <dependency>
+  		<groupId>org.apache.poi</groupId>
+  		<artifactId>poi</artifactId>
+  		<version>3.9</version>
+	</dependency>
+	<dependency>
+  		<groupId>org.apache.poi</groupId>
+  		<artifactId>poi-ooxml</artifactId>
+  		<version>3.9</version>
+	</dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8" http-equiv="Context-Type" content="text/html"/> 
+	<!--meta charset="utf-8" http-equiv="Context-Type" content="application/json"/--> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户注册</title>
+	<style type="text/css">
+		* {
+			padding:0;
+			margin:0;
+		}
+		html,
+		body{
+			width: 100%;
+			height: 100%;
+			background-image: url('../img/pmp_bg.png');
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+		}
+		#register {
+			width:540px;
+			height:310px;
+			border:1px solid rgb(12, 177, 75);
+			margin:0 auto;
+			margin-top:20px;
+		}
+		#register .row {
+			height:50px;
+			line-height:50px;
+			border-bottom:1px dashed #ccc;
+		}
+		#register .row div {
+			float:left;
+			height:50px;
+			line-height:50px;
+		}
+		#register .row .left {
+			width:30%;
+			text-align:right;
+		}
+		#register .row .right {
+			width:70%;
+		}
+		#register .row .right input {
+			width:200px;
+			height:25px;
+			border:1px solid #ccc;
+			border-radius:4px;
+			padding:0px 4px;
+			margin-left:10px;
+		}
+		#register .row .right input[type=radio] {
+			width:30px;
+			height:15px;
+			line-height:15px;
+		}
+		#register .row button {
+			width:100px;
+			height:40px;
+			line-height:30px;
+			margin:0 auto;
+		}
+		#bg {
+			width:100%;
+			height:800px;
+			background:black;
+			opacity:0.8;
+			position:absolute;
+			top:0px;
+			z-index:10;
+			display:none;
+		}
+		#msg-box {
+			height:100px;
+			line-height:100px;
+			text-align:center;
+			top:240px;
+			position:absolute;
+			z-index:100;
+			display:none;
+		}
+		.loading {
+			width:100px;
+			margin-left:48%;
+			/*background-image:url('loading.gif');*/
+			background-repeat:no-repeat;
+		}
+		.success {
+			width:400px;
+			margin-left:34%;
+			color:green;
+			border:2px solid green;
+		}
+		.error {
+			width:400px;
+			margin-left:34%;
+			color:red;
+			border:2px solid red;
+		}
+	</style>
+	<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+	<script type="text/javascript">
+		$(function($) {
+		checkUsername();
+		checkPhone();
+		checkEmail();
+		checkPwd();
+		checkRpwd();
+		
+		//选择注册按钮,绑定点击事件
+		$("#reg_commit").click(function() {
+			reg();
+		});
+	});
+	//设置一个标记
+	var flag = false;
+	//检测用户名
+	var checkUsername = function() {
+		$('#username').on("blur", function() {
+			var pattern = /^\w{6,18}$/;
+			var element = $('#username');
+			if (pattern.test(element.val())) {
+				element.css("border", "2px solid green");
+				flag = true;
+			} else {
+				element.css("border", "2px solid red");
+				flag = false;
+			}
+			console.log("====username=====");
+		});
+	}
+
+	//检测手机号
+	var checkPhone = function() {
+		$('#phone').on("blur", function() {
+			var pattern = /^1(3|4|5|7|8|)\d{9}$/;
+			var element = $('#phone');
+			if (pattern.test(element.val())) {
+				element.css("border", "2px solid green");
+				flag = true;
+			} else {
+				element.css("border", "2px solid red");
+				flag = false;
+			}
+			console.log("====phone=====");
+		});
+	}
+
+	//检测邮箱
+	var checkEmail = function() {
+		$('#email').on("blur", function() {
+			var pattern = /^\w+@(\w+\.)+(([a-z]+)|([a-z]+\.[a-z]+))$/;
+			var element = $('#email');
+			if (pattern.test(element.val())) {
+				element.css("border", "2px solid green");
+				flag = true;
+			} else {
+				element.css("border", "2px solid red");
+				flag = false;
+			}
+			console.log("====email=====");
+		});
+	}
+
+	//检测密码
+	var checkPwd = function() {
+		$('#password').on("blur", function() {
+			var pattern1 = /^[1-9]{6,18}$/;
+			var pattern2 = /^[a-z]{6,18}$/;
+			var pattern3 = /^[A-Z]{6,18}$/;
+			var pattern4 = /^[0-9a-zA-Z~!@#$%^&*_-{6,18}]$/;
+			var element = $('#password');
+			if (pattern1.test(element.val()) || pattern2.test(element.val()) || pattern3.test(element.val()) || pattern4.test(element.val())) {
+				element.css("border", "2px solid green");
+				a = 11;
+				flag = a;
+			} else {
+				element.css("border", "2px solid red");
+				flag = false;
+			}
+			console.log("====checkpwd=====");
+		});
+	}
+
+	//检测再次输入的密码
+	var checkRpwd = function() {
+		$('#rpassword').on("blur", function() {
+			var element = $('#rpassword');
+			if (element.val() == $('#password').val() && element.val() != '' && element.val().length > 5 && element.val().length < 18) {
+				element.css("border", "2px solid green");
+			} else {
+				element.css("border", "2px solid red");
+			}
+			console.log("====checkrpwd=====");
+		});
+	}
+
+	//注册
+	//给提交按钮绑定一个点击事件,在点击事件中提交输入的内容
+	var reg = function() {
+		if (flag) {
+			//loading();
+			var formName = encodeURI($("#username").val());	//获取用户名
+			var formPasswd = encodeURI($("#password").val()); //获取用户密码
+			var formEmail = encodeURI($("#email").val());	//获取邮箱
+			var formTel = encodeURI($("#phone").val());		//获取电话
+			//小知识：不能使用"{}"",json中的字段类型需要后端pojo对象的类型、字段名保持一致。
+			var data_snd={'id':0,'userName':formName,'userPasswd':formPasswd,'email':formEmail,'telephone':formTel,'status':'','remark':''};
+			console.log("========="+data_snd.formName+"===============");
+			//开始发送数据
+			$.ajax({
+				//请求登录页
+				url:"http://localhost:8080/pm/userreg",
+				//提交方式
+				//type:"post",
+				method:"post",
+				//如果使用json，回传的数据格式就是json格式。
+				dataType:"json",
+				crossDomain:true,
+				headers: {
+                "Page-Code": "",
+                "Content-Type": "application/json"
+				},
+				xhrFields: {
+                "withCredentials": true
+            	},
+				//传送请求数据，JSON格式
+				//data:{'username':$("#formName"),'userpasswd':$("#formPasswd")},
+				//data:{username:formName,userpasswd:formPasswd,useremail:formEmail,usertelephone:formTel},
+				
+				//data:{'username':formName,'userpasswd':formPasswd,'useremail':formEmail,'usertelephone':formTel},
+				//后端pojo对象序列化为字符串，需要使用stringify转换，不然后端解析不了。
+				data:JSON.stringify(data_snd),
+				success:function(data){//登录成功后返回的数据
+					//根据返回值进行状态判断
+					console.log(data);
+					//var datamsg=JSON.parse(data);
+					if(data.status == "true"){
+						alert(data.message);
+					}else{
+						alert(data.message);
+					}
+				}
+			})
+		}
+	}
+
+	function loading() {
+		$('#bg').css('display', 'block'); //显示背景
+		$('#msg-box').css('display', 'block'); //显示消息框
+		$('#msg-box').addClass("loading"); //显示加载中图片
+	}
+
+	function msg_box(msg, flag = true) {
+		$('#bg').css('display', 'block'); //显示背景
+		$('#msg-box').css('display', 'block').removeClass('loading'); //显示消息框,并移除加载中图片
+		flag = flag ? 'success' : 'error';
+		$('#msg-box').addClass(flag);
+		$('#msg-box').html(msg);
+		var sec = 3;
+		$('#msg-box').html(msg + sec + '秒后跳转...');
+		setInterval(function() {
+			sec--;
+			$('#msg-box').html(msg + sec + '秒后跳转...');
+			if (sec == 0) {
+				// location.href = 'http://www.baidu.com';	//跳转页面
+			}
+
+		}, 1000);
+	}
+	</script>
+</head>
+<body>
+	<div id="register">
+		<div class="row">
+			<div class="left">
+				用户名:
+			</div>
+			<div class="right">
+				<input name="username" id="username" type="text" placeholder="请输入用户名">
+			</div>
+		</div>
+		<div class="row">
+			<div class="left">
+				手机:
+			</div>
+			<div class="right">
+				<input name="phone" id="phone" type="text" placeholder="请输入手机号">
+			</div>
+		</div>
+		<div class="row">
+			<div class="left">
+			邮箱:
+			</div>
+			<div class="right">
+				<input name="email" id="email" type="text" placeholder="请输入邮箱">
+			</div>
+		</div>
+		<div class="row">
+			<div class="left">
+				密码:
+			</div>
+			<div class="right">
+				<input name="password" id="password" type="password" placeholder="请输入密码">
+			</div>
+		</div>
+		<div class="row">
+			<div class="left">
+				确认密码:
+			</div>
+			<div class="right">
+				<input name="rpassword" id="rpassword" type="password" placeholder="请再次输入密码">
+			</div>
+		</div>
+		<div class="row">
+			<div class="left">
+			</div>
+			<div class="right">
+				<input type="button" id="reg_commit" value="注册">
+			</div>
+		</div>
+	</div>
+	<!--div id="bg"></div>
+	<div id="msg-box"></div-->	
+</body>
+</html>

@@ -1,0 +1,125 @@
+<head>
+	<meta charset="utf-8" http-equiv="Context-Type" content="text/html"/>
+
+	<style type="text/css">  
+        #fm{  
+            margin:0;  
+            padding:10px 30px;  
+        }  
+        .ftitle{  
+            font-size:14px;  
+            font-weight:bold;  
+            padding:5px 0;  
+            margin-bottom:10px;  
+            border-bottom:1px solid #ccc;  
+        }  
+        .fitem{  
+            margin-bottom:5px;  
+        }  
+        .fitem label{  
+            display:inline-block;  
+            width:80px;  
+        }  
+        .fitem input{  
+            width:160px;  
+        }  
+    </style>  
+
+	<script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-easyui-1.6.10/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/default/easyui.css" type="text/css">
+	<link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/icon.css" type="text/css">
+	<script type="text/javascript" src="../js/main.js"></script>
+</head>
+<body>
+	<table id="tb1"></table>  
+    <div id="tb" style="padding:5px">  
+        <div style="margin-bottom:5px">  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="reloadEqument()">刷新</a>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newEqument()">添加</a>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editEqument()">修改</a>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyEqument()">删除</a>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-upload" plain="true" onclick="uploadEqument()">上传</a>  
+		</div> 
+        <div id="dlg" class="easyui-dialog" style="width:400px;height:320px;padding:10px 20px"  
+            closed="true" buttons="#dlg-buttons">  
+            <div class="ftitle" text-align="center">新增用户
+            </div>  
+            <form id="fm" method="post" novalidate>  
+                <div class="fitem">  
+                    <label>用户名</label>  
+                    <input id="userName" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>用户密码:</label>  
+                    <input id="userPasswd" class="easyui-textbox" type="password" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>确认密码:</label>  
+                    <input id="userPasswd1" class="easyui-textbox" type="password" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>Email:</label>  
+                    <input id="Email" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>电话:</label>  
+                    <input id="Telephone" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>备注:</label>  
+                    <input id="beiz" class="easyui-textbox" required="true">  
+                </div>  
+            </form>
+        </div>  
+        <div id="mod" class="easyui-dialog" style="width:400px;height:320px;padding:10px 20px"  
+            closed="true" buttons="#mod-buttons">  
+            <div class="ftitle" text-align="center">修改用户</div>  
+            <form id="fm" method="post" novalidate>  
+                <div class="fitem">  
+                    <label>用户名</label>  
+                    <input id="userName_mod" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>用户密码:</label>  
+                    <input id="userPasswd_mod" class="easyui-textbox" type="password" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>确认密码:</label>  
+                    <input id="userPasswd1_mod" class="easyui-textbox" type="password" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>Email:</label>  
+                    <input id="email_mod" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>电话:</label>  
+                    <input id="telephone_mod" class="easyui-textbox" required="true">  
+                </div>  
+                <div class="fitem">  
+                    <label>备注:</label>  
+                    <input id="remark_mod" class="easyui-textbox" required="true">  
+                </div>  
+            </form> 
+        </div>
+        <div id="upload" class="easyui-dialog" style="width:400px;height:320px;padding:10px 20px"  
+            closed="true" buttons="#upload-buttons">  
+            <div class="ftitle" text-align="center">上传附件</div>  
+            <form id="upload_form" method="post" action="/upload" enctype="multipart/form-data" >  
+                <input class="easyui-filebox"   data-options="prompt:'浏览'" id="contractFile" name="contractFile" style="width: 255px" required:true> 
+            </form> 
+        </div>   
+    <div id="dlg-buttons">  
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>  
+    </div>  
+    <div id="mod-buttons">  
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="editUser()" style="width:90px">保存</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#mod').dialog('close')" style="width:90px">取消</a>  
+    </div>
+    <div id="upload-buttons">  
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="uploadUser()" style="width:90px">提交</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#upload').dialog('close')" style="width:90px">取消</a>  
+    </div>
+</body>

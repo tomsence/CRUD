@@ -1,0 +1,65 @@
+<head>
+		<meta charset="utf-8" http-equiv="Context-Type" content="text/html"/>
+</head>
+<body>
+	<script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-easyui-1.6.10/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-easyui-1.6.10/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/default/easyui.css" type="text/css">
+	<link rel="stylesheet" href="../js/jquery-easyui-1.6.10/themes/icon.css" type="text/css">
+	<script type="text/javascript" src="../js/main.js"></script>
+	 <table id="dg"></table>
+		<script type="text/javascript">
+			$(function(){
+				$("#dg").datagrid({
+					/* title:"用户管理", */  //可要可不要
+					//url: "List.action",
+					method: "POST",
+					singleSelect:true,//如果为true，则只允许选择一行。
+					ctrlSelect:true, //在启用多行选择的时候允许使用Ctrl键+鼠标点击的方式进行多选操作。
+					fitColumns:true, //真正的自动展开/收缩列的大小，以适应网格的宽度，防止水平滚动。
+					striped:true,    //是否显示斑马线效果
+					fit:true,
+					/* loadMsg:"Processing, please wait …", */ //在从远程站点加载数据的时候显示提示消息。
+					rownumbers: true, //如果设置为true则会添加一列来显示行号。
+					pagination: true, //如果为true，则在DataGrid控件底部显示分页工具栏。
+					pageSize: 10, //在设置分页属性的时候初始化页面数据条数。
+					pageList: [10, 20, 50], //在设置分页属性的时候 初始化页面数据显示条数选择列表
+					toolbar:[{
+						text:"增加",
+						iconCls:"icon-add",
+						handler:function(){
+							newusers();
+						}
+					},"-",{
+						text:"删除",
+						iconCls:"icon-remove",
+						handler:function(){
+						}
+					},"-",{
+						text:"修改",
+						iconCls:"icon-edit",
+						handler:function(){
+						
+						}
+					},"-",{
+						text:"查询",
+						iconCls:"icon-search",
+						handler:function(){
+						
+						}
+					} ],
+					
+					
+					columns:[[
+						//这里的field对应的是后台的字段属性
+						{field:"id",title:"编号",width:100},
+						{field:"userName",title:"用户名",width:100},
+						{field:"password",title:"密码",width:100},
+						{field:"email",title:"Email",width:100},
+						{field:"mobile",title:"电话",width:100},
+					]]
+				});
+			});
+		</script>
+	</body>
